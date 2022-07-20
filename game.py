@@ -1,22 +1,20 @@
-def ask_pencils_num() -> int:
-    return int(input('How many pencils would you like to use:').strip())
+from player import Player
+import user_interface
+from status import Status
 
 
-def ask_first_player(name_1: str, name_2: str) -> str:
-    return input('Who will be the first ({}, {}):'.format(name_1, name_2)).strip()
+player_1 = Player('John')
+player_2 = Player('Jack')
+pencils_number = user_interface.ask_pencils_num()
+first_player = user_interface.ask_first_player(player_1, player_2)
 
+status = Status(first_player)
 
-def print_pencils(num: int) -> None:
-    print('|' * num)
+while True:
+    user_interface.print_pencils(pencils_number)
+    pencils_to_remove = user_interface.ask_remove_num(status.current_player.name)
+    pencils_number -= pencils_to_remove
+    status.switch_status(player_1, player_2)
 
-
-def print_first_player(name: str) -> None:
-    print('{} is going first!'.format(name))
-
-
-name1 = 'John'
-name2 = 'Jack'
-pencils_number = ask_pencils_num()
-first_player = ask_first_player(name1, name2)
-print_pencils(pencils_number)
-print_first_player(first_player)
+    if pencils_number <= 0:
+        break
