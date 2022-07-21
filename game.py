@@ -12,7 +12,7 @@ status = Status(first_player)
 
 while True:
     user_interface.print_pencils(pencils_number)
-    pencils_to_remove = user_interface.ask_remove_num(status.current_player.name, pencils_number)
+    pencils_to_remove = user_interface.remove_num_player(status.current_player.name, pencils_number, player_2)
     pencils_number -= pencils_to_remove
     status.switch_status(player_1, player_2)
 
